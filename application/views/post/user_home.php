@@ -101,12 +101,19 @@
                 var i = 1;
                 var tbody = "";
                 for (var key in data) {
+
+                  if(data[key]['type']==0){
+                      role = "Admin";
+                    }
+                    else{
+                      role = "User";
+                    }
                     tbody += "<tr>";
                     // tbody += "<td>" + i++ + "</td>";
                     tbody += "<td>" + data[key]['id'] + "</td>";
                     tbody += "<td>" + data[key]['firstName'] + "</td>";
                     tbody += "<td>" + data[key]['lastName'] + "</td>";
-                    tbody += "<td>" + data[key]['type'] + "</td>";
+                    tbody += "<td>" + role + "</td>";
                    
                     tbody += "<tr>";
                 }

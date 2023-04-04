@@ -68,7 +68,9 @@ class TestController extends CI_Controller{
             $this->load->view('post/home',$data);
 		}
 		else{
-			echo "No accounts found";
+            $this->session->set_flashdata('error','You cannot go back');
+            $this->load->view('post/login_page');
+            
 		}
     
  
@@ -90,7 +92,8 @@ class TestController extends CI_Controller{
             $this->load->view('post/user_home',$data);
 		}
 		else{
-			echo "No accounts found";
+			$this->load->view('post/login_page');
+            $this->session->set_flashdata('error','You cannot go back');
 		}
 
     }

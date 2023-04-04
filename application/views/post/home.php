@@ -1,4 +1,6 @@
+
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -113,13 +115,21 @@
             success: function(data) {
                 var i = 1;
                 var tbody = "";
+                var role ="";
                 for (var key in data) {
+
+                    if(data[key]['type']==0){
+                      role = "Admin";
+                    }
+                    else{
+                      role = "User";
+                    }
                     tbody += "<tr>";
                     // tbody += "<td>" + i++ + "</td>";
                     tbody += "<td>" + data[key]['id'] + "</td>";
                     tbody += "<td>" + data[key]['firstName'] + "</td>";
                     tbody += "<td>" + data[key]['lastName'] + "</td>";
-                    tbody += "<td>" + data[key]['type'] + "</td>";
+                    tbody += "<td>" + role + "</td>";
                     tbody += `<td>
                                     
                                     <a href="#" id="edit" class="btn btn-primary edit-button" value="${data[key]['id']}">Edit</a>
@@ -281,12 +291,12 @@
 </script>
     
 
-    <div class="search-box" id="" >
+    <!-- <div class="search-box" id="" >
 
         <form id="search-form" >
           <input type="text" name="search-term">
           <button type="submit">Search</button>
-        </form>
+        </form> -->
 
       
     </div>
