@@ -17,9 +17,10 @@ class TestController extends CI_Controller{
         
 	}
 
+
 	public function index(){
        
-
+        $this->load->view('post/header');
         $this->load->library('session');
         if($this->session->userdata('user')){
 			redirect('new_home');
@@ -33,6 +34,7 @@ class TestController extends CI_Controller{
        
 	}
     public function user_index(){
+        $this->load->view('post/user_header');
         $this->load->library('session');
         if($this->session->userdata('user')){
 			redirect('ordinary_home');

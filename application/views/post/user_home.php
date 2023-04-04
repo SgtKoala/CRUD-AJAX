@@ -8,7 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   </head>
   <body>
-
+  <Header>
+  <?php $this->load->view('/post/user_header'); ?>
+  </Header>
   <div class="container text-center">
   <div class="row align-items-start">
  
@@ -33,7 +35,7 @@
     </table>
     </div>
   </div>
-  <a href="<?php echo base_url(); ?>/testcontroller/logout" class="btn btn-danger">Logout</a>
+  <!-- <a href="<?php echo base_url(); ?>/testcontroller/logout" class="btn btn-danger">Logout</a> -->
 </div>
   
 
