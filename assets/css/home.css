@@ -1,0 +1,39 @@
+*{
+    margin:0;
+    padding:0;
+}
+#exampleModal{
+    height:50vh;
+}
+
+#createUserButton{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+}
+.centerContent{
+    display:flex ;
+    justify-content:center;
+    align-items:center;
+}
+/* body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+} */
+
+.search-box{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+}
+#search-form{
+    margin-top:10px;
+}
+#search-results{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction:column;
+
+}
