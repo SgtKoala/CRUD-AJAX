@@ -30,7 +30,7 @@
       <thead>
         <tr>
           <th scope="col">id</th>
-          <th scope="col">Testing</th>
+          <th scope="col">First</th>
           <th scope="col">Last</th>
           <th scope="col">Role</th>
           <th scope="col">Buttons</th>
