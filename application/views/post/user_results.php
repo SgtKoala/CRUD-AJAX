@@ -10,11 +10,7 @@
     tbody += "<td>" + "<?php echo $result['firstName']?>" + "</td>";
     tbody += "<td>" + "<?php echo $result['lastName']?>" + "</td>";
     tbody += "<td>" + "<?php echo $result['type']?>" + "</td>";
-    tbody += `<td> 
     
-      <a href="#" id="edit" class="btn btn-primary edit-button" value="<?php echo $result['id']; ?>">Edit</a>
-      <a href="" id="" class="btn btn-danger delete-button" value="<?php echo $result['id']; ?>">Delete</a>
-    </td>`;
     tbody += "</tr>";
   <?php endforeach; ?>
 

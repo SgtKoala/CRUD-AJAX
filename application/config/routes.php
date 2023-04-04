@@ -63,6 +63,7 @@ $route['fetch'] = 'testcontroller/fetch';
 $route['login'] = 'testcontroller/login';
 $route['login_entry'] = 'testcontroller/login_entry';
 $route['search'] = 'testcontroller/search';
+$route['user_search'] = 'testcontroller/user_search';
 $route['results'] = 'testcontroller/results';
 $route['login_page'] = 'testcontroller/login_page';
 $route['new_home'] = 'testcontroller/home';

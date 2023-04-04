@@ -256,6 +256,11 @@ class TestController extends CI_Controller{
       $data['results'] = $this->testmodel->search($searchTerm); // call the search method of your model
       $this->load->view('post/results', $data); // load a view file that displays the search results
     }
+    public function user_search(){
+      $searchTerm = $this->input->post('searchTerm');
+      $data['results'] = $this->testmodel->search($searchTerm); // call the search method of your model
+      $this->load->view('post/user_results', $data); // load a view file that displays the search results
+    }
  
   
     public function results(){
