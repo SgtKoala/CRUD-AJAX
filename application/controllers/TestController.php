@@ -109,26 +109,26 @@ class TestController extends CI_Controller{
         echo "practice display controller";
     }
     public function create(){
-        $this->load->library('session');
+        // $this->load->library('session');
  
-		//restrict users to go to home if not logged in
-		if($this->session->userdata('user')){
-			// $this->load->view('post/home');
-            if($this->session->userdata('role')==0){
+		// //restrict users to go to home if not logged in
+		// if($this->session->userdata('user')){
+		// 	// $this->load->view('post/home');
+        //     if($this->session->userdata('role')==0){
                 
                 $this->load->view('post/create');
                 
-            }else if($this->session->userdata('role')==1){
+        //     }else if($this->session->userdata('role')==1){
                 
-                $this->load->view('post/user_home');
-                $this->session->set_flashdata('error','You cannot access this page!');
-            }
+        //         $this->load->view('post/user_home');
+        //         $this->session->set_flashdata('error','You cannot access this page!');
+        //     }
             
-		}
-		else{
-			$this->load->view('post/user_home');
-            $this->session->set_flashdata('error','You cannot go back');
-		}
+		// }
+		// else{
+		// 	$this->load->view('post/user_home');
+        //     $this->session->set_flashdata('error','You cannot go back');
+		// }
 
     }
     
