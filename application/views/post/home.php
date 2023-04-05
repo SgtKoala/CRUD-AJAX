@@ -18,35 +18,31 @@
   <?php $this->load->view('/post/header'); ?>
   </Header>
 
-
+  <div class="mainContent">
   <div class="container text-center">
-  <div class="row align-items-start">
-  <?php
-				$user = $this->session->userdata('user');
-				extract($user);
-			?>
-    <div class="col">
-        <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">id</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Role</th>
-          <th scope="col">Buttons</th>
-          
-          
-        </tr>
-      </thead>
-      <tbody id="tbody">
-
-    
-
-      </tbody>
-    </table>
+    <div class="row align-items-start">
+      <div class="col">
+        <div style="max-height: 500px; overflow-y: scroll;">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Role</th>
+                <th scope="col">Buttons</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+            <!-- table content -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
   
 
      
@@ -56,48 +52,36 @@
 
 <!-- Modal -->
 
-  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
 
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-        <form id="update-form" action ="" method="post">
+      <div class="modal-body">
+        <form id="update-form" action="" method="post">
           <input type="hidden" id="edit_modal_id" value="">
-
-        <div class="form-group">
-          <label for="titleID">Name</label>
-          <input class="form-control" type="text" name="firstname" id="edit_first">
-        </div>
-
-        <div class="form-group">
-          <label for="descriptionID">Last Name</label>
-          <input class="form-control" type="text" name="lastname" id="edit_last">
-        </div>
-
-        <div class="form-group">
-          <label for="descriptionID">Role</label>
-          <input class="form-control" type="number" name="role" id="edit_role" placeholder="0 = Admin 1 = User" Required>
-        </div>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <a href="" class="btn btn-success update-button" id="updateID"> <i class="fas fa-trash"></i> Update </a> -->
-        <button type="button" class="btn btn-primary" id="updateID">Update</button>
-        
+          <div class="form-group">
+            <label for="titleID">Name</label>
+            <input class="form-control" type="text" name="firstname" id="edit_first">
+          </div>
+          <div class="form-group">
+            <label for="descriptionID">Last Name</label>
+            <input class="form-control" type="text" name="lastname" id="edit_last">
+          </div>
+          <div class="form-group">
+            <label for="descriptionID">Role</label>
+            <input class="form-control" type="number" name="role" id="edit_role" placeholder="0 = Admin 1 = User" required>
+          </div>
+          <div class="text-center" style="margin-top: 10px;">
+            <button type="button" class="btn btn-primary" id="updateID">Update</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
         </form>
-
-  </div>
-        </div>
-        <div class="modal-footer">
-          
-        </div>
       </div>
+     
     </div>
   </div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 <script src="<?php echo base_url("/assets/js/jquery-3.6.4.min.js")?>"></script>

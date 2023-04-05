@@ -8,6 +8,7 @@ class TestController extends CI_Controller{
 	{
 		parent::__construct();
 		$this->load->model('testmodel');
+
         $this->load->helper(array('form', 'url'));
 		$this->load->library(array('form_validation'));
         header('Access-Control-Allow-Origin: *');
@@ -21,12 +22,15 @@ class TestController extends CI_Controller{
 	public function index(){
        
         $this->load->view('post/header');
+
         $this->load->library('session');
+
         if($this->session->userdata('user')){
 			redirect('new_home');
             // $this->load->view('new_home');
 		}else{
-			$this->load->view('login');
+            $this->session->set_flashdata('error','You have to be logged in to continue.');
+			redirect('login_page');
 		}
 
 
@@ -40,7 +44,8 @@ class TestController extends CI_Controller{
 			redirect('ordinary_home');
             // $this->load->view('new_home');
 		}else{
-			$this->load->view('login');
+            $this->session->set_flashdata('error','You have to be logged in to continue.');
+			redirect('login_page');
 		}
 
 
@@ -63,8 +68,10 @@ class TestController extends CI_Controller{
 
 
             
-            $data['data'] = $this->testmodel->get_entries('tbl_list');
-           
+            // $data['data'] = $this->testmodel->get_entries('tbl_list');
+
+            $data['data'] = $this->General_model->fetch_all('*','tbl_list');
+          
             $this->load->view('post/home',$data);
 		}
 		else{
@@ -102,10 +109,43 @@ class TestController extends CI_Controller{
         echo "practice display controller";
     }
     public function create(){
-        $this->load->view('post/create');
+        $this->load->library('session');
+ 
+		//restrict users to go to home if not logged in
+		if($this->session->userdata('user')){
+			// $this->load->view('post/home');
+            if($this->session->userdata('role')==0){
+                
+                $this->load->view('post/create');
+                
+            }else if($this->session->userdata('role')==1){
+                
+                $this->load->view('post/user_home');
+                $this->session->set_flashdata('error','You cannot access this page!');
+            }
+            
+		}
+		else{
+			$this->load->view('post/user_home');
+            $this->session->set_flashdata('error','You cannot go back');
+		}
+
     }
+    
     public function login_page(){
+        // $this->load->library('session');
         $this->load->view('post/login_page');
+
+        $this->load->library('session');
+        
+        // if($this->session->userdata('user')){
+			
+        //     // $this->load->view('new_home');
+		// }else{
+        //     $this->session->set_flashdata('error','You have to be logged in to continue.');
+			
+		// }
+
     }
 
     public function login(){
@@ -231,8 +271,10 @@ class TestController extends CI_Controller{
                 'type' => $this->input->post('role')
 
             );
-             $this->db->insert('tbl_list', $data);
-             echo 'success';
+            //  $this->db->insert('tbl_list', $data);
+             $this->General_model->insert_vals($data, 'tbl_list');
+             echo "success";
+            
 
 
         }
@@ -270,7 +312,8 @@ class TestController extends CI_Controller{
     public function fetch()
 	{
 		if ($this->input->is_ajax_request()) {
-			$posts = $this->testmodel->get_entries();
+			// $posts = $this->testmodel->get_entries();
+            $posts=$this->General_model->fetch_all('*','tbl_list');
 			echo json_encode($posts);
 		} else {
 			echo "'No direct script access allowed'";
@@ -310,28 +353,21 @@ class TestController extends CI_Controller{
     // }
 
     public function update(){
-        if($this ->input->is_ajax_request()){
-            // $this->form_validation->set_rules('fname','Name','required');
-            // $this->form_validation->set_rules('lname','Name','required');
-
-            // if($this->form_validation->run()==FALSE){
-            //     $data = array('responce' =>'error','message'=>validation_errors());
-            // }
-            // else{
-                $data['id'] = $this->input->post('edit_id');
-                $data['firstName'] = $this->input->post('edit_first');
-                $data['lastName'] = $this->input->post('edit_last');
-                $data['type'] = $this->input->post('edit_role');
-                if($this->testmodel->insert_entry($data)){
-                    $data = array('response'=>'success','message'=>'success');
-                }else{
-                    $data = array('response'=>'error','message'=>'failed');
-                }
-            // }
-        }else{
+        if($this->input->is_ajax_request()){
+            $data['id'] = $this->input->post('edit_id');
+            $data['firstName'] = $this->input->post('edit_first');
+            $data['lastName'] = $this->input->post('edit_last');
+            $data['type'] = $this->input->post('edit_role');
+    
+            if($this->General_model->custom_update_vals($data, array('id' => $data['id']), 'tbl_list')){
+                $response = array('response'=>'success','message'=>'success');
+            } else {
+                $response = array('response'=>'error','message'=>'failed');
+            }
+            echo json_encode($response);
+        } else {
             echo "No direct script access allowed";
         }
-        echo json_encode($data);
     }
 
    

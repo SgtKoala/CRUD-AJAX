@@ -11,31 +11,38 @@
   <Header>
   <?php $this->load->view('/post/user_header'); ?>
   </Header>
+
   <div class="container text-center">
   <div class="row align-items-start">
- 
     <div class="col">
-        <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">id</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Role</th>
-         
-          
-          
-        </tr>
-      </thead>
-      <tbody id="tbody">
-
-    
-
-      </tbody>
-    </table>
+      <div style="max-height: 500px; overflow-y: auto;">
+      <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Role</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <!-- Table rows go here -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
- 
+</div>
+<div class="container">
+  <?php
+  if ($this->session->flashdata('error')) {
+    ?>
+    <div class="alert alert-danger text-center" style="margin-top:20px;">
+      <?php echo $this->session->flashdata('error'); ?>
+    </div>
+    <?php
+  }
+  ?>
 </div>
   
 
