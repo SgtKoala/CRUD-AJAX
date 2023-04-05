@@ -23,7 +23,7 @@
     <div class="row align-items-start">
       <div class="col">
         <div style="max-height: 500px; overflow-y: scroll;">
-          <table class="table table-sm table-striped">
+          <table class="table table-sm table-striped" id="usersTable">
             <thead>
               <tr>
                 <th scope="col">id</th>
@@ -43,6 +43,124 @@
   </div>
 </div>
 
+
+<!-- create modal -->
+<div class="modal fade" id="createModal"tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form id="create-form">
+          
+          <div class="form-group">
+            <label for="titleID">Username</label>
+            <input class="form-control" type="text" name="username" id="create_user">
+          </div>
+          <div class="form-group">
+            <label for="titleID">Password</label>
+            <input class="form-control" type="password" name="password" id="create_pass">
+          </div>
+  
+          <div class="form-group">
+            <label for="titleID">First Name</label>
+            <input class="form-control" type="text" name="firstname" id="create_first">
+          </div>
+
+          <div class="form-group">
+            <label for="descriptionID">Last name</label>
+            <input class="form-control" type="text" name="lastname" id="create_last">
+          </div>
+
+          <div class="form-group">
+            <label for="descriptionID">Role</label>
+            <input class="form-control" type="number" name="role" id="create_role" placeholder="0 = Admin 1 = User" Required>
+          </div>
+
+          
+
+      </div>
+
+      <div class="d-flex justify-content-center " id="create-button">
+        <div class="form-group">
+              
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="submit" class="btn btn-success" id="buttonCreate"> <i class="fas fa-check"></i> Submit </button>
+                
+                
+        </div>
+       </form>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+<script src="<?php echo base_url("/assets/js/jquery-3.6.4.min.js")?>"></script>
+<script>
+        
+          $('#create-link').on('click', function(){
+            event.preventDefault();
+            $('#createModal').modal('show');
+
+          });
+
+            $('#create-form').submit(function(event) {
+            event.preventDefault();
+
+          $.ajax({
+            url: '<?php echo base_url('TestController/store')?>',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType:'json',
+            success: function(response) {
+              if (response) {
+                alert('Record created Successfully');
+                alert(response.id);
+                // Find the table row with the new entry's data and replace it with the updated data
+                var newRow = $('<tr>').append(
+                  $('<td>').text(response.id),
+                  $('<td>').text($('#create_first').val()),
+                  $('<td>').text($('#create_last').val()),
+                  $('<td>').text($('#create_role').val()),
+                  $('<td>').append(
+                      $('<a>').attr('href', '#').attr('class', 'btn btn-primary edit-button').attr('value', response).text('Edit'),
+                      $('<a>').attr('href', '#').attr('class', 'btn btn-danger delete-button').attr('value', response).text('Delete')
+                  )
+              );
+
+                $('#usersTable tbody').append(newRow);
+
+                // Hide the modal
+                $('#createModal').modal('hide');
+              } else {
+                alert('Failed');
+              }
+            }
+          });
+        });
+
+
+
+
+  
+          
+
+</script>
+
+
+
+
+
+
+
+
+
+
   
 
      
@@ -50,7 +168,7 @@
 
 
 
-<!-- Modal -->
+<!--Edit Modal -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
@@ -117,6 +235,7 @@
                     tbody += `<td>
                                     
                                     <a href="#" id="edit" class="btn btn-primary edit-button" value="${data[key]['id']}">Edit</a>
+                                    
                                     <a href="" id="" class="btn btn-danger delete-button" value="${data[key]['id']}">Delete</a>
                                 </td>`;
                     tbody += "<tr>";
@@ -129,7 +248,11 @@
     }
 
    fetch();
+$(document).on("click","#create",function(event){
+  event.preventDefault();
 
+  $('#createModal').modal('show');
+})
   
   $(document).on("click", "#edit", function(event){
   
@@ -260,7 +383,7 @@
         success: function(data){
           fetch();
           if(data.response === 'success'){
-            // row.remove();
+            // row.remove();d
             alert('Record deleted successfully');
           }else{
             alert('Failed to delete');

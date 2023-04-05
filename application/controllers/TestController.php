@@ -172,6 +172,7 @@ class TestController extends CI_Controller{
         
  
 		if($data){
+            
 			$this->session->set_userdata('user', $data);
             $this->session->set_userdata('role',$query->row()->type);
             if($this->session->userdata('role')==0){
@@ -262,22 +263,26 @@ class TestController extends CI_Controller{
         echo json_encode($data);
     }
 
-    public function store(){
-                $data = array(
-                'username' => $this->input->post('username'),
-                'password' => $this->input->post('password'),
-                'firstName' => $this->input->post('firstname'),
-                'lastName' => $this->input->post('lastname'),
-                'type' => $this->input->post('role')
+    public function store() {
+        $data = array(
+          'username' => $this->input->post('username'),
+          'password' => $this->input->post('password'),
+          'firstName' => $this->input->post('firstname'),
+          'lastName' => $this->input->post('lastname'),
+          'type' => $this->input->post('role')
+        );
+      
+        $this->General_model->insert_vals($data, 'tbl_list');
+        $id = $this->db->insert_id(); // Get the ID of the newly created record
+        $data = array('response' => 'success', 'id' => $id);
 
-            );
-            //  $this->db->insert('tbl_list', $data);
-             $this->General_model->insert_vals($data, 'tbl_list');
-             echo "success";
-            
-
-
-        }
+       
+      
+        // echo json_encode(array('status' => 'success', 'id' => $id));
+        echo json_encode($data);
+        
+      }
+      
 
 
     public function delete(){

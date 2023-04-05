@@ -9,9 +9,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="">Home</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?= base_url('create') ?>" >Create new User</a>
-        </li> -->
+        <li class="nav-item">
+      
+          <a class="nav-link active" aria-current="page" type="submit" id="create-link" href="" >Create new User</a>
+         
+        </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>/testcontroller/logout">Logout</a>
         </li>

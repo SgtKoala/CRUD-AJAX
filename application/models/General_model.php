@@ -48,14 +48,11 @@ class General_model extends CI_Model
     public function insert_vals($data, $table) // simple insert
 
     {
-        $this->db->trans_start();
         $this->db->insert($table, $data);
-        $this->db->trans_complete();
-        if ($this->db->trans_status() === false) {
-            return 0;
-        } else {
-            return 1;
-        }
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+       
+       
     }
 
     public function batch_insert($data, $table)
